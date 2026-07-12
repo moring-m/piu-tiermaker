@@ -1,0 +1,95 @@
+.tier-board {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+    margin-bottom: 16px;
+
+}
+
+.hide-on-preview {
+    display: none;
+}
+
+.tier-row {
+
+    display: flex;
+    background-color: transparent;
+
+    min-height: 83px;
+    align-items: stretch;
+    gap: 4px;
+
+}
+
+.tier-color-picker {
+
+    width: 16px;
+    height: 20px;
+
+    cursor: pointer;
+
+}
+
+
+.tier-name {
+
+    width: 100px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    border-radius: 8px;
+
+}
+
+.tier-name input {
+
+    width: 100px;
+    max-width: 100px;
+
+    background: transparent;
+
+    border: none;
+
+    text-align: center;
+
+
+    font-weight: bold;
+
+    outline: none;
+
+    font-size: 18px;
+
+}
+
+
+.tier-content {
+
+    
+    background-color: #555;
+
+    display: flex;
+
+    flex-wrap: wrap;
+    flex: 1;
+    align-content: flex-start;
+
+
+    border-radius: 8px;
+    gap: 4px;
+
+    padding: 4px;
+
+}
+
+.tier-add{
+    font-size: 16px;
+}

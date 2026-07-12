@@ -1,0 +1,16 @@
+.header-editor {
+
+    display: flex;
+
+    gap: 12px;
+
+}
+
+.header-editor input {
+
+    width: 100%;
+    flex: 1;
+
+    padding: 8px;
+
+}

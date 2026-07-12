@@ -1,0 +1,28 @@
+.filter-bar {
+
+
+    display: flex;
+
+    justify-content: stretch;
+    max-width: 904px;
+
+    gap: 4px;
+    padding: 4px;
+
+    margin-top: 16px;
+
+
+}
+
+.filter-title {
+    width: 100%;
+    color: white;
+
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.filter-group {
+    min-width: 80px;
+    font-size: 16px;
+}

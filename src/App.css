@@ -1,0 +1,132 @@
+.workspace {
+    display: flex;
+    justify-content: stretch;
+    gap: 16px;
+}
+
+.app-container {
+
+    width: 100%;
+
+    max-width: 1156px;
+
+    margin: 0 auto;
+
+    padding: 24px;
+
+    box-sizing: border-box;
+
+}
+
+.song-pool-area {
+    max-width: 648px;
+    height: 100%;
+    margin-top: 260px;
+    margin-right: 16px;
+    margin-bottom: 16px;
+}
+
+.tier-export-area {
+
+    background: #222;
+
+    padding: 32px;
+
+}
+
+.marker-area {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    align-items: center;
+}
+
+.marker-group {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 4px;
+}
+
+.marker-label {
+    font-size: 16px;
+    color: #bbb;
+}
+
+.channel {
+
+    width: 26px;
+
+    height: 26px;
+
+    font-size: 20px;
+
+    border-radius: 30%;
+
+    background-color:rgb(157, 0, 235);
+
+    border: 2px solid rgb(0, 0, 0);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+    
+    color: rgb(255, 255, 255);
+
+    font-weight: bold;
+
+}
+
+.rise {
+
+    width: 26px;
+
+    height: 26px;
+
+    font-size: 20px;
+
+    border-radius: 50%;
+
+    background-color:gold;
+
+    border: 2px solid rgb(0, 0, 0);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+    
+    color: black;
+
+    font-weight: bold;
+
+}
+
+.premium {
+
+    width: 26px;
+
+    height: 26px;
+
+    font-size: 20px;
+
+    border-radius: 50%;
+
+    background-color:crimson;
+
+    border: 2px solid rgb(0, 0, 0);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+    
+    color: white;
+
+    font-weight: bold;
+
+}
