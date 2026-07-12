@@ -5,12 +5,14 @@
   "private": false,
   "version": "1.0.0",
   "type": "module",
+  "homepage": "https://moring-m.github.io/piu-tiermaker/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "deploy": "gh-pages -d dist",
     "lint": "oxlint",
     "preview": "vite preview"
+    
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
