@@ -8,7 +8,7 @@
 
     width: 100%;
 
-    max-width: 1156px;
+    max-width: 1052px;
 
     margin: 0 auto;
 
@@ -21,7 +21,7 @@
 .song-pool-area {
     max-width: 648px;
     height: 100%;
-    margin-top: 60px;
+    margin-top: 24px;
     margin-right: 16px;
     margin-bottom: 16px;
 }
@@ -59,8 +59,7 @@
     width: 100%;
     text-align: left;
     color: #bbb;
-    margin-top: 16px;
-    margin: 8px;
+    margin: 6px;
     font-size: 16px;
 }
 

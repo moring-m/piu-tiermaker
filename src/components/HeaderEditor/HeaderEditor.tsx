@@ -129,7 +129,7 @@ function HeaderEditor({
 
                 >
 
-                    티어표 미리보기
+                    미리보기
 
                 </button>
 

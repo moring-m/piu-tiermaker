@@ -11,6 +11,8 @@ import Header from "./components/Header/Header";
 import type { HeaderInfo } from "./types/HeaderInfo";
 import HeaderEditor from "./components/HeaderEditor/HeaderEditor";
 import { useRef } from "react";
+import { exportTierList, downloadJson, loadJsonFile, } from "./services/saveService";
+import JsonBar from "./components/JsonBar/JsonBar";
 
 function App() {
 
@@ -99,6 +101,10 @@ function App() {
 
     const exportRef = useRef<HTMLDivElement>(null);
 
+    const loadingJsonRef = useRef(false);
+
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
     const levels = useMemo(() => {
 
         const levels = new Set<number>();
@@ -118,6 +124,11 @@ function App() {
     }, [filter.mode]);
 
     useEffect(() => {
+        if (loadingJsonRef.current) {
+            loadingJsonRef.current = false;
+            return;
+        }
+
         if (levels.length === 0) {
             return;
         }
@@ -153,36 +164,51 @@ function App() {
     };
 
     const saveAsImage = async () => {
-
         if (!exportRef.current) {
-
             return;
-
         }
-
-
         const { toPng } = await import(
             "html-to-image"
         );
-
-
         const dataUrl = await toPng(
             exportRef.current,
             {
                 pixelRatio: 2,
             }
         );
-
-
         const link = document.createElement("a");
-
         link.download =
             `${tierInfo.title}_${tierInfo.version}_${filter.mode}${filter.level}.png`;
 
         link.href = dataUrl;
-
         link.click();
+    };
 
+    const saveAsJson = () => {
+        const saveData = exportTierList({
+            header: tierInfo,
+            filter,
+            tiers,
+        });
+        downloadJson(saveData);
+    };
+
+    const loadFromJson = async (
+        event: React.ChangeEvent<HTMLInputElement>,
+    ) => {
+        const file = event.target.files?.[0];
+
+        if (!file) {
+            return;
+        }
+
+        loadingJsonRef.current = true;
+
+        const saveData = await loadJsonFile(file);
+
+        setFilter(saveData.filter);
+        setTierInfo(saveData.header);
+        setTiers(saveData.tiers);
     };
 
     return (
@@ -313,7 +339,7 @@ function App() {
                                     R
                                 </div>
                                 <div className="marker-label">
-                                    라이즈 전용
+                                    라이즈 연동
                                 </div>
                             </div>
                         </div>
@@ -329,6 +355,12 @@ function App() {
                 </div>
                 <div className="song-pool-area">
                     {!previewMode && (
+                        <JsonBar
+                            onSaveJson={saveAsJson}
+                            onLoadJson={() => fileInputRef.current?.click()}
+                        />
+                    )}
+                    {!previewMode && (
                         <div>
                             <div className="use-info-area">
                                 곡 목록에서 자켓을 끌어다가 티어에 배치하세요. (난이도 바꾸면 초기화됩니다)
@@ -337,10 +369,13 @@ function App() {
                                 티어 이름 클릭하면 수정 가능하고, 추가 및 삭제, 그리고 색 변경도 됩니다.
                             </div>
                             <div className="use-info-area">
-                                티어표 미리보기 누르면 깔끔하게 볼 수 있고, 이미지로 저장 가능합니다.
+                                미리보기 누르면 깔끔하게 볼 수 있고, 이미지로 저장 가능합니다.
                             </div>
                             <div className="use-info-area">
                                 이미지로 저장할 때는 되도록 페이지 배율을 100%로 설정해주세요.
+                            </div>
+                            <div className="use-info-area">
+                                Json 파일로 내보내 저장하거나 이미 만들어진 서열표를 불러올 수 있습니다.
                             </div>
                         </div>
                     )}
@@ -359,6 +394,15 @@ function App() {
 
             </div>
 
+            <input
+                ref={fileInputRef}
+                type="file"
+                accept=".json"
+                style={{
+                    display: "none",
+                }}
+                onChange={loadFromJson}
+            />
         </DndContext>
 
     );
