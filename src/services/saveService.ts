@@ -1,6 +1,6 @@
 import type { SaveData } from "../types/SaveData";
 import type { HeaderInfo } from "../types/HeaderInfo";
-import type { ChartMode } from "../types/ChartMode";
+import { ChartModeLabel, type ChartMode } from "../types/ChartMode";
 import type { Tier } from "../types/Tier";
 import { songs } from "../data/songs";
 
@@ -61,7 +61,7 @@ export function downloadJson(data: SaveData) {
 
     link.href = url;
 
-    link.download = "tier-list.json";
+    link.download = data.header.title + " - " + data.header.subtitle + " " + ChartModeLabel[data.filter.mode].toUpperCase() + "" + data.filter.level + " by " + data.header.creator + ".json";
 
     link.click();
 
