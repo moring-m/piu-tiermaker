@@ -21,7 +21,7 @@
 .song-pool-area {
     max-width: 648px;
     height: 100%;
-    margin-top: 260px;
+    margin-top: 60px;
     margin-right: 16px;
     margin-bottom: 16px;
 }
@@ -32,6 +32,36 @@
 
     padding: 32px;
 
+}
+
+.site-info-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #666;
+    margin-top: 24px;
+}
+
+.source-info-area {
+    margin: 0 auto;
+    max-width: 648px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #555;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+.use-info-area {
+    margin: 0 auto;
+    width: 100%;
+    text-align: left;
+    color: #bbb;
+    margin-top: 16px;
+    margin: 8px;
+    font-size: 16px;
 }
 
 .marker-area {

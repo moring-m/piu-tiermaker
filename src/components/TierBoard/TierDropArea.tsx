@@ -2,8 +2,8 @@ import { useDroppable } from "@dnd-kit/core";
 
 import type { Tier } from "../../types/Tier";
 import type { Song } from "../../types/song";
-import ChartCard from "../ChartCard/ChartCard";
 import { songs } from "../../data/songs";
+import SortableChartCard from "../ChartCard/SortableChartCard";
 
 
 interface Props {
@@ -59,7 +59,7 @@ function TierDropArea({
 
                 return (
 
-                    <ChartCard
+                    <SortableChartCard
 
                         key={song.title}
 

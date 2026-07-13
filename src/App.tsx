@@ -317,9 +317,33 @@ function App() {
                                 </div>
                             </div>
                         </div>
+
+                        <div className="site-info-area">
+                            Created with PIU Tiermaker by moring
+                        </div>
+                        <div className="source-info-area">
+                            
+                            PIU Tiermaker is a fan-made tool for Pump It Up. All game-related assets and resources used in this project are the property of their respective copyright holders.
+                        </div>
                     </div>
                 </div>
                 <div className="song-pool-area">
+                    {!previewMode && (
+                        <div>
+                            <div className="use-info-area">
+                                곡 목록에서 자켓을 끌어다가 티어에 배치하세요. (난이도 바꾸면 초기화됩니다)
+                            </div>
+                            <div className="use-info-area">
+                                티어 이름 클릭하면 수정 가능하고, 추가 및 삭제, 그리고 색 변경도 됩니다.
+                            </div>
+                            <div className="use-info-area">
+                                티어표 미리보기 누르면 깔끔하게 볼 수 있고, 이미지로 저장 가능합니다.
+                            </div>
+                            <div className="use-info-area">
+                                이미지로 저장할 때는 되도록 페이지 배율을 100%로 설정해주세요.
+                            </div>
+                        </div>
+                    )}
                     {!previewMode && (
                         <FilterBar
                             filter={filter}
