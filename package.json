@@ -5,7 +5,7 @@
   "private": false,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://moring-m.github.io/piu-tiermaker/",
+  "homepage": "/piu-tiermaker",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
