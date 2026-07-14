@@ -18,12 +18,20 @@
 
 }
 
-.song-pool-area {
-    max-width: 648px;
-    height: 100%;
+.song-pool-dummy {
+    min-width: 564px;
     margin-top: 24px;
-    margin-right: 16px;
-    margin-bottom: 16px;
+    margin-left: 16px;
+    background: transparent;
+}
+
+
+.song-pool-area {
+    position: fixed;
+    left: 16px;
+    max-width: 564px;
+    max-height: calc(100vh - 16px);
+    margin-top: 24px;
 }
 
 .tier-export-area {

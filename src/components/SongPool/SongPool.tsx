@@ -9,13 +9,13 @@ import {
 import SortableChartCard from "../ChartCard/SortableChartCard";
 
 interface Props {
-
     songs: Song[];
-
+    isDragging: boolean;
 }
 
 function SongPool({
-    songs
+    songs,
+    isDragging
 }: Props) {
     const { setNodeRef } = useDroppable({ id:"song-pool", });
 
@@ -24,6 +24,9 @@ function SongPool({
         <div
             ref={setNodeRef}
             className="song-pool"
+            style={{
+                overflow: isDragging ? "hidden" : "auto",
+            }}
         >
 
             

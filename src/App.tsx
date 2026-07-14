@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { DndContext } from "@dnd-kit/core";
+import { DndContext, DragOverlay } from "@dnd-kit/core";
 import SongPool from "./components/SongPool/SongPool";
 import TierBoard from "./components/TierBoard/TierBoard";
 import { songs } from "./data/songs";
@@ -13,6 +13,9 @@ import HeaderEditor from "./components/HeaderEditor/HeaderEditor";
 import { useRef } from "react";
 import { exportTierList, downloadJson, loadJsonFile, } from "./services/saveService";
 import JsonBar from "./components/JsonBar/JsonBar";
+import ChartCard from "./components/ChartCard/ChartCard";
+import Modal from "./components/Modal/Modal";
+
 
 function App() {
 
@@ -89,6 +92,12 @@ function App() {
     });
 
     const [previewMode, setPreviewMode] = useState(false);
+
+    const [isDragging, setIsDragging] = useState(false);
+
+    const [activeSongId, setActiveSongId] = useState<string | null>(null);
+
+    const [helpOpen, setHelpOpen] = useState(false);
 
     const placedSongIds = new Set(
         tiers.flatMap(tier => tier.songs)
@@ -211,10 +220,22 @@ function App() {
         setTiers(saveData.tiers);
     };
 
+    const activeSong = songs.find(
+        song => song.title === activeSongId
+    );
+
     return (
 
         <DndContext 
+            onDragStart={(event) => {
+                setIsDragging(true);
+                setActiveSongId(
+                    event.active.id as string
+                );
+            }}
             onDragEnd={(event)=>{
+                setIsDragging(false);
+                setActiveSongId(null);
                 const {
                     active,
                     over
@@ -264,6 +285,29 @@ function App() {
             }}>
 
             <div className="workspace">
+                {!previewMode && (
+                <div className="song-pool-dummy">
+                    
+                </div>
+                )}
+                {!previewMode && (
+                <div className="song-pool-area">
+                    <JsonBar
+                        onSaveJson={saveAsJson}
+                        onLoadJson={() => fileInputRef.current?.click()}
+                        onOpenHelp={() => setHelpOpen(true)}
+                    />
+                    <FilterBar
+                        filter={filter}
+                        setFilter={setFilter}
+                        availableLevels={levels}
+                    />
+                    <SongPool 
+                        songs={filteredSongs} 
+                        isDragging={isDragging}
+                    />
+                </div>
+                )}
                 <div className="app-container">
                     <HeaderEditor
                         headerInfo={tierInfo}
@@ -353,44 +397,6 @@ function App() {
                         </div>
                     </div>
                 </div>
-                <div className="song-pool-area">
-                    {!previewMode && (
-                        <JsonBar
-                            onSaveJson={saveAsJson}
-                            onLoadJson={() => fileInputRef.current?.click()}
-                        />
-                    )}
-                    {!previewMode && (
-                        <div>
-                            <div className="use-info-area">
-                                곡 목록에서 자켓을 끌어다가 티어에 배치하세요. (난이도 바꾸면 초기화됩니다)
-                            </div>
-                            <div className="use-info-area">
-                                티어 이름 클릭하면 수정 가능하고, 추가 및 삭제, 그리고 색 변경도 됩니다.
-                            </div>
-                            <div className="use-info-area">
-                                미리보기 누르면 깔끔하게 볼 수 있고, 이미지로 저장 가능합니다.
-                            </div>
-                            <div className="use-info-area">
-                                이미지로 저장할 때는 되도록 페이지 배율을 100%로 설정해주세요.
-                            </div>
-                            <div className="use-info-area">
-                                Json 파일로 내보내 저장하거나 이미 만들어진 서열표를 불러올 수 있습니다.
-                            </div>
-                        </div>
-                    )}
-                    {!previewMode && (
-                        <FilterBar
-                            filter={filter}
-                            setFilter={setFilter}
-                            availableLevels={levels}
-                        />
-                    )}
-
-                    {!previewMode && (
-                        <SongPool songs={filteredSongs} />
-                    )}
-                </div>
 
             </div>
 
@@ -403,6 +409,29 @@ function App() {
                 }}
                 onChange={loadFromJson}
             />
+
+            <DragOverlay>
+                {activeSong && (
+                    <ChartCard
+                        song={activeSong}
+                    />
+                )}
+            </DragOverlay>
+
+            <Modal
+                open={helpOpen}
+                title="도움말"
+                onClose={() => setHelpOpen(false)}
+            >
+                <ul>
+                    <li>곡 목록에서 자켓을 끌어다가 티어에 배치하세요. (난이도 바꾸면 초기화됩니다)</li>
+                    <li>티어 이름 클릭하면 수정할 수 있고, 추가 및 삭제, 그리고 색 변경도 가능합니다.</li>
+                    <li>미리보기 누르면 깔끔하게 볼 수 있고, 이미지로 저장 가능합니다.</li>
+                    <li>사용되지 않는 티어는 이미지 저장 시 자동으로 숨김 처리됩니다.</li>
+                    <li>이미지로 저장할 때는 되도록 페이지 배율을 100%로 설정해주세요.</li>
+                    <li>Json 파일로 내보내 저장하거나 이미 만들어진 서열표를 불러올 수 있습니다.</li>
+                </ul>
+            </Modal>
         </DndContext>
 
     );

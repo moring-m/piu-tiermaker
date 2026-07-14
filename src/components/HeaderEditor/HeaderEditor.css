@@ -14,3 +14,8 @@
     padding: 8px;
 
 }
+
+
+.header-editor button {
+    min-width: 72px;
+}

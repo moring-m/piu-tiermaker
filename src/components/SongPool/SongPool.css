@@ -2,13 +2,19 @@
 
     background-color: #555;
 
-    width: 548px;
-    max-width: 548px;
+    min-width: 564px;
+    max-width: 564px;
     border-radius: 8px;
     min-height: 175px;
+    max-height: calc(100vh - 130px);
     display: flex;
 
     flex-wrap: wrap;
+
+    flex: 1;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
 
     gap: 8px;
     margin-top: 2px;
